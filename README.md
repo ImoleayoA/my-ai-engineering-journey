@@ -2,7 +2,7 @@
 
 This repository documents my journey from **Python fundamentals to AI engineering**.
 
-I am building my Python foundation step by step, starting from the basics and gradually progressing toward real-world applications, AI, and full-stack AI development.
+I am building my Python foundation step by step, starting from the basics and progressing toward problem solving, real-world projects, AI/ML, and eventually full-stack AI applications.
 
 ---
 
@@ -12,13 +12,13 @@ My long-term goal is to become an **AI Engineer** capable of building real-world
 
 The learning path I'm following is:
 
-**Python Fundamentals → Problem Solving → Data & APIs → Backend Development → AI/ML → Full-Stack AI Applications → Real-World Projects**
+**Python Fundamentals → Problem Solving → Projects → Data & APIs → Backend Development → AI/ML → Full-Stack AI Applications → Real-World AI Projects**
 
 ---
 
 ## Current Stage: Python Fundamentals
 
-I am currently learning and practicing the core concepts of Python.
+I am currently building my foundation in Python by learning concepts through practice, exercises, and small programs.
 
 ### Topics Covered
 
@@ -32,6 +32,7 @@ I am currently learning and practicing the core concepts of Python.
 * Loops
 * Functions
 * Error Handling
+* File Handling
 * Basic Mathematics
 * Basic Problem Solving
 
@@ -43,7 +44,7 @@ I am currently learning and practicing the core concepts of Python.
 | ------------------ | ------------------------------------------ |
 | `hello.py`         | Basic Python output                        |
 | `greeting.py`      | User input and formatted output            |
-| `about_me.py`      | Variables and user information             |
+| `about_me.py`      | Variables and personal information         |
 | `about_you.py`     | Working with input and variables           |
 | `variables.py`     | Variables and data types                   |
 | `math_practice.py` | Arithmetic and mathematical operations     |
@@ -54,6 +55,16 @@ I am currently learning and practicing the core concepts of Python.
 | `loops.py`         | Repetition using loops                     |
 | `functions.py`     | Creating and using functions               |
 | `errors.py`        | Error handling and `try/except`            |
+| `files.py`         | Reading from and writing to files          |
+| `main.py`          | Practicing Python program structure        |
+| `my_tools.py`      | Practicing reusable Python code            |
+
+### Supporting Files
+
+| File        | Purpose                         |
+| ----------- | ------------------------------- |
+| `list.txt`  | Practice data for file handling |
+| `notes.txt` | Notes and practice data         |
 
 ---
 
@@ -63,15 +74,17 @@ I'm not just memorizing Python syntax. I'm focusing on understanding **why the c
 
 My current focus includes:
 
-* Understanding Python syntax
+* Understanding Python syntax and fundamentals
 * Writing programs from scratch
 * Breaking problems into smaller steps
 * Using conditions and loops to control program flow
 * Working with lists and dictionaries
 * Creating reusable functions
-* Handling invalid user input and errors
+* Handling invalid input and errors
+* Reading from and writing to files
+* Understanding how different Python files work together
 * Improving code structure and readability
-* Building small projects to reinforce each concept
+* Practicing problem solving through small programs
 
 ---
 
@@ -90,9 +103,9 @@ My current focus includes:
 * [x] Loops
 * [x] Functions
 * [x] Error Handling
-* [ ] More Python Problem Solving
-* [ ] File Handling
+* [x] File Handling
 * [ ] JSON
+* [ ] More Python Problem Solving
 * [ ] Modules & Packages
 * [ ] Object-Oriented Programming
 * [ ] Larger Python Projects
@@ -118,16 +131,16 @@ My current focus includes:
 
 ## Progress
 
-This repository will grow as I progress through the roadmap.
+This repository will continue to grow as I progress through my AI Engineering roadmap.
 
-Each new topic and project will be added as I build a stronger foundation in Python and move closer to my goal of becoming an **AI Engineer**.
+Each new topic, exercise, and project represents another step in building my programming foundation and developing the skills I need to work with AI.
 
 > **Start with the fundamentals. Build projects. Understand the concepts. Keep progressing.**
 
 ---
 
-## Journey
+## AI Engineering Journey
 
-This repository is part of my larger journey toward becoming an **AI Engineer**.
+This repository is the beginning of my journey toward becoming an **AI Engineer**.
 
-I'm documenting the process from the very beginning so that the repository reflects both what I've learned and how my skills develop over time.
+I'm documenting the process from the fundamentals so that I can track my progress, strengthen my understanding, and build toward creating real-world applications with AI at the core.

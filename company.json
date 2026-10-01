@@ -1,0 +1,17 @@
+{
+    "name": "TechCorp",
+    "employees": [
+        {
+            "name": "CiA",
+            "role": "Ai Engineer"
+        },
+        {
+            "name": "CiA",
+            "role": "AI Operator"
+        }
+    ],
+    "location": {
+        "city": "Lagos",
+        "country": "Nigeria"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "name": "CiA",
+    "age": 18,
+    "skills": [
+        "Trading",
+        "Video Editing",
+        "Photography"
+    ],
+    "learning": true
+}

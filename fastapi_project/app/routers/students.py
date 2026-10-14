@@ -1,71 +1,65 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
-from app.database import get_connection
+from sqlalchemy.orm import Session
+from app.db import get_db
+from app.models import Student as StudentModel
 
 router = APIRouter(prefix="/students", tags=["students"])
 
-class Student(BaseModel):
+class StudentCreate(BaseModel):
     name: str
     age: int
     grade: str
 
-@router.get("/")
-def list_students():
-    connection = get_connection()
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM students")
-    rows = cursor.fetchall()
-    connection.close()
-    return [dict(row) for row in rows]
+class StudentResponse(BaseModel):
+    id: int
+    name: str
+    age: int
+    grade: str
 
-@router.get("/{student_id}")
-def get_student(student_id: int):
-    connection = get_connection()
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM students WHERE id = ?", (student_id,))
-    row = cursor.fetchone()
-    connection.close()
-    if row is None:
+    class Config:
+        from_attributes = True
+
+@router.get("/", response_model=list[StudentResponse])
+def list_students(db: Session = Depends(get_db)):
+    return db.query(StudentModel).all()
+
+@router.get("/{student_id}", response_model=StudentResponse)
+def get_student(student_id: int, db: Session =  Depends(get_db)):
+    student = db.get(StudentModel, student_id)
+    if student is None:
         raise HTTPException(status_code=404, detail="Student not found")
-    return dict(row)
+    return student
 
-@router.post("/")
-def create_student(student: Student):
-    connection = get_connection()
-    cursor = connection.cursor()
-    cursor.execute(
-        "INSERT INTO students (name, age, grade) VALUES (?, ?, ?)",
-        (student.name, student.age, student.grade)
+@router.post("/", response_model=StudentResponse, status_code=201)
+def create_student(student: StudentCreate, db: Session = Depends(get_db)):
+    new_student = StudentModel(
+        name=student.name,
+        age=student.age,
+        grade=student.grade
     )
-    connection.commit()
-    new_id = cursor.lastrowid
-    connection.close()
-    return {"id": new_id, "name": student.name, "age": student.age, "grade": student.grade}
+    db.add(new_student)
+    db.commit()
+    db.refresh(new_student)
+    return new_student
 
-@router.put("/{student_id}")
-def update_student(student_id: int, student: Student):
-    connection = get_connection()
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM students WHERE id = ?", (student_id,))
-    if cursor.fetchone() is None:
-        connection.close()
+@router.put("/{student_id}", response_model=StudentResponse)
+def update_student(student_id: int, student: StudentCreate, db: Session = Depends(get_db)):
+    db_student = db.get(StudentModel, student_id)
+    if db_student is None:
         raise HTTPException(status_code=404, detail="Student not found")
-    cursor.execute(
-        "UPDATE students SET name = ?, age = ?, grade = ? WHERE id = ?", (student.name, student.age, student.grade, student_id)
-    )
-    connection.commit()
-    connection.close()
-    return {"id": student_id, "name": student.name, "age": student.age, "grade": student.grade}
+    db_student.name = student.name
+    db_student.age = student.age
+    db_student.grade = student.grade
+    db.commit()
+    db.refresh(db_student)
+    return db_student
 
 @router.delete("/{student_id}")
-def delete_student(student_id: int):
-    connection = get_connection()
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM students WHERE id = ?", (student_id,))
-    if cursor.fetchone() is None:
-        connection.close()
+def delete_student(student_id: int, db: Session = Depends(get_db)):
+    db_student = db.get(StudentModel, student_id)
+    if db_student is None:
         raise HTTPException(status_code=404, detail="Student not found")
-    cursor.execute("DELETE FROM students WHERE id = ?", (student_id,))
-    connection.commit()
-    connection.close()
+    db.delete(db_student)
+    db.commit()
     return {"message": "Student deleted"}
